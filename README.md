@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # cybsecadv
 =======
 # Cyber Security Advisory Utility Belt (cybsecadv)
@@ -28,3 +29,6 @@ quasar build
 ### Customize the configuration
 See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
 >>>>>>> 351aaac... this is the first commit, but not the initial state. Firebase-Authentication with GoogleAuthProvider is running
+=======
+# cybsecadv
+>>>>>>> dbe72894480551e0831be9af37a7f9581cd47088
