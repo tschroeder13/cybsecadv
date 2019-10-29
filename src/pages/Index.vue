@@ -1,7 +1,6 @@
 <template>
   <q-page class="flex flex-center">
     <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
-     <q-btn color="white" text-color="black" label="LOGOUT" @click="logoutUser" />
   </q-page>
 </template>
 

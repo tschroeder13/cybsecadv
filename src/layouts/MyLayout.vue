@@ -6,13 +6,13 @@
           flat
           dense
           round
-          @click="leftDrawerOpen = !leftDrawerOpen"
+          @click="leftDrawerState = !leftDrawerState"
           icon="menu"
           aria-label="Menu"
         />
 
         <q-toolbar-title>
-          Cyber Security Advisor's Utility Belt ({{ currentUser.displayName }})
+          Cyber Security Advisor's Utility Belt
         </q-toolbar-title>
 
       </q-toolbar><q-btn
@@ -27,8 +27,9 @@
         <q-btn
           v-else
           @click="logoutUser"
-          class="absolute-right q-pr-sm"
+          class="absolute-right q-pr-sm z-top"
           :icon="imageURL"
+          style="background: primary"
           no-caps
           flat
           dense>
@@ -36,72 +37,7 @@
           {{ currentUser.displayName }}
         </q-btn>
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-      content-class="bg-grey-2"
-    >
-      <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="school" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://github.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="code" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Github</q-item-label>
-            <q-item-label caption>github.com/quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="chat" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Discord Chat Channel</q-item-label>
-            <q-item-label caption>chat.quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="record_voice_over" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Forum</q-item-label>
-            <q-item-label caption>forum.quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://twitter.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="rss_feed" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Twitter</q-item-label>
-            <q-item-label caption>@quasarframework</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://facebook.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="public" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Facebook</q-item-label>
-            <q-item-label caption>@QuasarFramework</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
-
+    <drawerMenu/>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -109,25 +45,37 @@
 </template>
 
 <script>
+import drawerMenu from 'components/drawerMenu'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MyLayout',
-
+  components: {
+    drawerMenu
+  },
   data () {
     return {
-      leftDrawerOpen: false
+      // leftDrawerOpen: false
     }
   },
   computed: {
     ...mapState('userStore', ['currentUser']),
+    ...mapState('localUiStore', ['leftDrawerOpen']),
+    leftDrawerState: {
+      get: function () {
+        return this.leftDrawerOpen
+      },
+      set: function (open) {
+        this.setLeftDrawerOpen(open)
+      }
+    },
     imageURL () {
       let url = 'img:' + this.currentUser.photoURL
-      console.log(url)
       return url
     }
   },
   methods: {
-    ...mapActions('userStore', ['logoutUser'])
+    ...mapActions('userStore', ['logoutUser']),
+    ...mapActions('localUiStore', ['setLeftDrawerOpen'])
   }
 }
 </script>
