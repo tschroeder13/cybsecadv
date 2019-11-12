@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
-    "@toby.mosque/quasar-app-extension-utils": "^1.0.0-beta.29",
     "axios": "^0.18.1",
     "faker": "^4.1.0",
     "firebase": "^7.2.1",
