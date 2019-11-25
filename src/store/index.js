@@ -1,22 +1,19 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { vuexfireMutations } from 'vuexfire'
+Vue.use(Vuex)
 
 // import example from './module-example'
 import userStore from './userStore'
 import localUiStore from './localUiStore'
-
-Vue.use(Vuex)
-
-/*
- * If not building with SSR mode, you can
- * directly export the Store instantiation
- */
-
+import reptileStore from './reptileStore'
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
+    mutations: vuexfireMutations,
     modules: {
       userStore,
-      localUiStore
+      localUiStore,
+      reptileStore
     },
 
     // enable strict mode (adds overhead!)
